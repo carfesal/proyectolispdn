@@ -14,7 +14,7 @@ if ($rows == 1){
     $fila = mysqli_fetch_row($result);
     $_SESSION['usr'] = $fila[1];
     $_SESSION['id'] =$fila[0];
-    echo "<script> location.href='index.php'</script>";
+    echo "Ingreso exitoso,".$fila[1].",".$fila[0];
 
 }else{
     echo "Acceso denegado!!";

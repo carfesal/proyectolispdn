@@ -30,7 +30,7 @@
   <body>
 
     <div class="container">
-      <form method="POST" action="validar.php">
+      <form method="POST">
         <div class="form-group">
           <label for="usuarioTxt">Usuario:</label>
           <input type="text" class="form-control" name="usuario" id="usuarioTxt" placeholder="Ingrese Usuario" required>
@@ -40,10 +40,36 @@
           <input type="password" class="form-control" name="contrasena" id="passTxt" placeholder="Ingrese Contraseña" required>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary" value="validar">Login</button><br>
+        <button type="submit" class="btn btn-primary" value="validar" name="submit">Login</button><br>
         <p>Sin cuenta?<a href="registro.php" class="badge badge-pill badge-success">Registrate</a></p>
         
       </form>
+      <?php
+        if(isset($_POST['submit'])){
+          require_once('connection.php');
+
+          $usr=$_POST['usuario'];
+          $pass=$_POST['contrasena'];
+  
+          $query = "SELECT * FROM usuario WHERE usuario='$usr' AND contrasena='$pass'";
+          $result = mysqli_query($conn, $query);
+          $rows = mysqli_num_rows($result);
+  
+  
+          if ($rows == 1){
+              session_start();
+              $fila = mysqli_fetch_row($result);
+              $_SESSION['usr'] = $fila[1];
+              $_SESSION['id'] =$fila[0];
+              echo "<script> location.href='index.php'</script>";
+  
+          }else{
+              echo "Acceso denegado!!";
+          }
+        }
+        
+
+      ?>
     </div>
     
 
