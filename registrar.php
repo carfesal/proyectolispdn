@@ -15,7 +15,7 @@
         $query = "INSERT INTO usuario (nombres, usuario, contrasena) VALUES ('$nombres','$usuario','$password')";
         $res = mysqli_query($conn, $query);
         if($res){
-            echo "Usuario creado Exitosamente";
+            echo "'$usuario' Usuario creado Exitosamente";
         }
                 
     }   
