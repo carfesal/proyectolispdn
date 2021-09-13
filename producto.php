@@ -86,6 +86,64 @@
             }
           ?>
       </div>
+      <div class="container">
+        <h4>INGRESAR PRODUCTO</h4>
+
+        <form method="POST" class="form-inline my-2 my-lg-1">        		
+          <div class="form-group">
+            <label for="nombresTxt">Nombre Producto:</label>
+            <input type="text" class="form-control" name="nombre" id="nombresTxt" placeholder="Ingrese Usuario" required>
+          </div>
+          <div class="form-group">
+            <label for="categoriaTxt">Categoria:</label>
+            <input type="text" class="form-control" name="categoria" id="categoriaTxt" placeholder="Ingrese Categoria" required>
+          </div>
+
+          <div class="form-group">
+            <label for="stock">Stock: </label>
+            <input type="number" class="form-control" name="stock" id="stock" required>
+          </div>
+          <div class="form-group">
+            <label for="precio">Precio: </label>
+            <input type="number" class="form-control" name="precio" id="precio" required>
+          </div>
+          <input class="btn btn-outline-success my-3 my-sm-0" type="submit" name="sub" value="Crear Producto">       
+        </form>
+        <?php
+          if(isset($_POST['sub'])){
+            $nombre= $_POST['nombre'];
+            $categoria=$_POST['categoria'];
+            $precio = $_POST['precio'];
+            $cantidad = $_POST['stock'];
+          
+          
+            $sql = "SELECT * FROM producto WHERE nombre='$nombre'"  ;
+          
+            $resultado = mysqli_query($conn,$sql);
+          
+            $count = mysqli_num_rows($resultado);
+            if ($count == 0){
+                  $sql2 = "INSERT INTO producto (nombre,categoria,stock,precio) VALUES ('$nombre','$categoria','$cantidad','$precio')";
+                  $result = mysqli_query($conn,$sql2);
+                  if($result){
+                    echo "<div class='alert alert-success' role='alert'>
+                            Producto creado exitosamente
+                          </div>";
+                  }else{
+                    echo "<div class='alert alert-danger' role='alert'>
+                            Ocurrio un problema
+                          </div>";
+                  }
+                }else{
+                      echo "<div class='alert alert-danger' role='alert'>
+                                Producto ya existe
+                            </div>";
+                }
+          }
+          // validar
+          
+        ?>
+      </div>
       
     </div>
     
