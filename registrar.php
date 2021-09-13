@@ -7,7 +7,7 @@
 
     $val = "SELECT * FROM usuario WHERE usuario='$usuario'";
     $result = mysqli_query($conn, $val);
-
+    echo "$usuario";
     $rows = mysqli_num_rows($result);
     if($rows > 0){
         echo "Usuario ya existente";
