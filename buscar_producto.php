@@ -9,7 +9,7 @@
     if($rows > 0){
         $productos_csv = "";
         while($fila=mysqli_fetch_array($result, MYSQLI_ASSOC)){
-            $productos .= $fila['nombre'].",".$fila['precio']."\n";     
+            $productos_csv .= $fila['nombre'].",".$fila['precio']."\n";     
         }
         echo $productos_csv;            
     }else{
