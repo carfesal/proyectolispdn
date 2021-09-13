@@ -10,7 +10,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item active">
             <a class="nav-link" href="index.php">Inicio</a>
           </li>
@@ -21,15 +21,15 @@
             <a class="nav-link" href="producto.php">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="acerca.php">Acerca de</a>
+            <a class="nav-link" href="acerca.php">Log Out</a>
           </li>
         </ul>
         <?php
           session_start();
           if(isset($_SESSION['usr'])){
-            echo "<span class='navbar-text'>".$_SESSION['usr']."</span>";
+            echo "<span class='navbar-text navbar-right mr-1'>Total: $<span id='total' >".$_SESSION['total']."</span>  </span><span class='navbar-text navbar-right'>".$_SESSION['usr']."</span>";
           }else{
-            echo "<span class='navbar-text'>No logueado</span>";
+            echo "<span class='navbar-text navbar-right'>No logueado</span>";
           }
         ?>
       </div>

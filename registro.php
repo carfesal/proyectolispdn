@@ -21,7 +21,7 @@
             <a class="nav-link" href="producto.php">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="acerca.php">Acerca de</a>
+            <a class="nav-link" href="acerca.php">Log Out</a>
           </li>
         </ul>
       </div>

@@ -2,6 +2,7 @@
   <head>
     <title>Carrito Compras</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
   </head>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -10,7 +11,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link" href="index.php">Inicio</a>
           </li>
@@ -21,9 +22,18 @@
             <a class="nav-link" href="producto.php">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="acerca.php">Acerca de</a>
+            <a class="nav-link" href="acerca.php">Log Out</a>
           </li>
         </ul>
+        <?php
+          session_start();
+          if(isset($_SESSION['usr'])){
+            echo "<span class='navbar-text navbar-right mr-1'>Total: $<span id='total' >".$_SESSION['total']."</span>  </span>
+                  <span class='navbar-text navbar-right'>".$_SESSION['usr']."</span>";
+          }else{
+            echo "<span class='navbar-text navbar-right'>No logueado</span>";
+          }
+        ?>
       </div>
     </nav>
   </header>
@@ -52,12 +62,20 @@
                               <h5 class='card-title'>".$fila['nombre']."</h5>
                               <p class='card-text'>Precio: $".$fila['precio']."</p>
                               <p class='card-text'>Stock: ".$fila['stock']."</p>
-                              <a href='#' class='btn btn-primary'>Comprar</a>
+                              <form method='POST'>
+                                <div class='mb-3'>
+                                  
+                                  <label for='cantidad' class='form-label'>Cantidad:</label>
+                                  <input type='number' class='form-control' id='cantidad".$fila['id']."' name='cantidad'>
+                                </div>
+                                <input type='button' class='btn btn-primary' onclick='alClic(".$fila['id'].",".$fila['precio'].")' value='Agregar' name='submit'>
+                              </form>
                             </div>
                           </div>
                         </div>";
+                  
                 }
-
+                
                 echo "</div>";
               }else{
                 echo "<div class='alert alert-danger' role='alert'>
@@ -71,5 +89,21 @@
       
     </div>
     
+    <script type="text/javascript">
+      function alClic(id, precio){
+        console.log("Entra"+id); 
+        cantidad = parseInt(document.getElementById('cantidad'+id).value);
+        total = document.getElementById('total');
+        subtotal = precio * cantidad;
+        if(total){
+          $.post('agregar_carrito.php',{'subtotal': subtotal}, function(data){
+            $('body').append(data);
+          });
+        }else{
+          alert('Debe loguearse para agregar al carrito.');
+        }
+      }
+    </script>
   </body>
+  
 </html>

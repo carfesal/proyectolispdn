@@ -21,7 +21,7 @@
             <a class="nav-link" href="producto.php">Productos</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="acerca.php">Acerca de</a>
+            <a class="nav-link" href="acerca.php">Log Out</a>
           </li>
         </ul>
       </div>
@@ -41,7 +41,7 @@
         </div>
         <br>
         <button type="submit" class="btn btn-primary" value="validar" name="submit">Login</button><br>
-        <p>Sin cuenta?<a href="registro.php" class="badge badge-pill badge-success">Registrate</a></p>
+        <p>Sin cuenta?<a href="registro.php" class="btn btn-link">Registrate</a></span>
         
       </form>
       <?php
@@ -61,6 +61,7 @@
               $fila = mysqli_fetch_row($result);
               $_SESSION['usr'] = $fila[1];
               $_SESSION['id'] =$fila[0];
+              $_SESSION['total']=0;
               echo "<script> location.href='index.php'</script>";
   
           }else{
